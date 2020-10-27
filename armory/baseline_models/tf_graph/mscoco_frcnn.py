@@ -45,10 +45,10 @@ class TensorFlowFasterRCNNOneIndexed(TensorFlowFasterRCNN):
             TensorFlowFasterRCNNOneIndexed, self
         ).predict(x)
         list_of_one_indexed_pred_dicts = []
-        for img_pred_dict in list_of_zero_indexed_pred_dicts:
-            zero_indexed_pred_labels = img_pred_dict["labels"]
-            img_pred_dict["labels"] = zero_indexed_pred_labels + 1
-            list_of_one_indexed_pred_dicts.append(img_pred_dict)
+        list_of_zero_indexed_pred_dicts['labels'] = list_of_zero_indexed_pred_dicts['detection_classes']+1
+        list_of_zero_indexed_pred_dicts['boxes']= list_of_zero_indexed_pred_dicts.pop('detection_boxes')
+        list_of_zero_indexed_pred_dicts['scores']= list_of_zero_indexed_pred_dicts.pop('detection_scores')
+        list_of_one_indexed_pred_dicts.append(list_of_zero_indexed_pred_dicts)
         return list_of_one_indexed_pred_dicts
 
 

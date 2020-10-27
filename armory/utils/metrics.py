@@ -491,9 +491,9 @@ def object_detection_AP_per_class(list_of_ys, list_of_y_preds):
             gt_boxes_list.append(gt_box_dict)
 
         for pred_box_idx in range(len(y_pred["labels"].flatten())):
-            label = y_pred["labels"][pred_box_idx]
-            box = y_pred["boxes"][pred_box_idx]
-            score = y_pred["scores"][pred_box_idx]
+            label = y_pred["labels"][0,pred_box_idx]
+            box = y_pred["boxes"][0,pred_box_idx]
+            score = y_pred["scores"][0,pred_box_idx]
 
             pred_box_dict = {
                 "img_idx": img_idx,
